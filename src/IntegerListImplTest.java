@@ -71,12 +71,12 @@ class IntegerListImplTest {
     @Test
     void containsCorrectItem() {
         completionArray();
-        Assertions.assertEquals(5, arrayListTemp.indexOf((Integer) 6));
+        Assertions.assertEquals(true, arrayListTemp.contains((Integer) 6));
     }
     @Test
     void containsItemNotFound() {
         completionArray();
-        Assertions.assertEquals(-1, arrayListTemp.indexOf((Integer) 66));
+        Assertions.assertEquals(false, arrayListTemp.contains((Integer) 66));
     }
 
     @Test
@@ -163,4 +163,23 @@ class IntegerListImplTest {
         Integer[] temp = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         Assertions.assertArrayEquals(temp, arrayListTemp.toArray());
     }
+
+    @Test
+    void sortInsertion(){
+        completionArray();
+        IntegerListImpl temp = new IntegerListImpl();
+        temp.add(10);
+        temp.add(9);
+        temp.add(8);
+        temp.add(7);
+        temp.add(6);
+        temp.add(5);
+        temp.add(4);
+        temp.add(3);
+        temp.add(2);
+        temp.add(1);
+
+        Assertions.assertArrayEquals(arrayListTemp.toArray(), temp.sortInsertion());
+    }
+
 }

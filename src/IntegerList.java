@@ -29,4 +29,5 @@ public interface IntegerList {
 
     Integer[] toArray();
 
+    Integer[] sortInsertion();
 }
