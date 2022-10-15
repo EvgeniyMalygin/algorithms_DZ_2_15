@@ -55,7 +55,7 @@ public class IntegerListImpl implements IntegerList {
             throw new ElementNotFoundExeption();
         }
         if (index != size) {
-            System.arraycopy(arrayInteger, index + 1, arrayInteger, index, size - index -1);
+            System.arraycopy(arrayInteger, index + 1, arrayInteger, index, size - index - 1);
         }
         size--;
         return item;
@@ -75,9 +75,25 @@ public class IntegerListImpl implements IntegerList {
     }
 
     @Override
-    public boolean contains(Integer item) {
+    public boolean contains(Integer element) {
+        this.sortInsertion();
+        int min = 0;
+        int max = this.size - 1;
 
-        return indexOf(item) != -1;
+        while (min <= max) {
+            int mid = (min + max) / 2;
+
+            if (element == this.get(mid)) {
+                return true;
+            }
+
+            if (element < this.get(mid)) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -147,5 +163,19 @@ public class IntegerListImpl implements IntegerList {
         if (index < 0 || index >= size) {
             throw new InvalidIndexExeption();
         }
+    }
+
+    @Override
+    public Integer[] sortInsertion() {
+        for (int i = 1; i < arrayInteger.length; i++) {
+            int temp = arrayInteger[i];
+            int j = i;
+            while (j > 0 && arrayInteger[j - 1] >= temp) {
+                arrayInteger[j] = arrayInteger[j - 1];
+                j--;
+            }
+            arrayInteger[j] = temp;
+        }
+        return arrayInteger;
     }
 }
